@@ -9,18 +9,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - name: Set up Python
-      uses: actions/setup-python@v2
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v3
       with:
         python-version: '3.12'
-        
-    - name: Set up geckodriver
-      run: |
-        mkdir drivers
-        wget https://github.com/mozilla/geckodriver/releases/download/v0.29.0/geckodriver-v0.29.0-linux64.tar.gz -O drivers/geckodriver.tar.gz
-        tar -xzf drivers/geckodriver.tar.gz -C drivers
-        chmod +x drivers/geckodriver
-        echo "$GITHUB_WORKSPACE/drivers" >> $GITHUB_PATH
 
     - name: Run tests with pipenv
-      run: python3 -m pytest tests
+      run: python -m pytest tests
