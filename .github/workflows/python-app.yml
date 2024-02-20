@@ -1,24 +1,45 @@
 name: Selenium CI
 
-on: [push]
+on:
+  push:
+    branches: [ '**' ]
+  pull_request:
+    branches: [ '**' ]
+
+permissions:
+  contents: write
+  checks: write
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
-    
+
     - name: Set up Python 3.12
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v2
       with:
         python-version: '3.12'
-    
+
     - name: Install pipenv
       run: pip install pipenv
-      
-    - name: Install dependencies with pipenv
-      run: pipenv install --deploy --ignore-pipfile
 
-    - name: Run tests with pipenv
-      run: pipenv run python3 -m pytest -vv tests/
+    - name: Install dependencies with pipenv
+      run: |
+        pipenv install --deploy --ignore-pipfile
+
+    - name: Set permissions for geckodriver
+      run: chmod +x drivers/geckodriver
+
+    - name: Run Tests with coverage
+      run: |
+        pipenv run python -m pytest --verbose --cov=tests --cov-report=xml
+
+    - name: Publish Test Report
+      uses: mikepenz/action-junit-report@v3
+      if: success() || failure()
+      with:
+        report_paths: '**/junit.xml'
+        detailed_summary: true
+        include_passed: true
