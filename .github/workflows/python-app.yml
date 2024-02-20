@@ -21,4 +21,4 @@ jobs:
       run: pipenv install --deploy --ignore-pipfile
 
     - name: Run tests with pipenv
-      run: pipenv run python -m pytest tests
+      run: pipenv run python3 -m pytest -vv tests/
