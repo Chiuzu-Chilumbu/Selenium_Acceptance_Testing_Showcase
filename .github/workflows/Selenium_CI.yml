@@ -15,7 +15,7 @@ permissions: # This is where we set permissions for the workflow specifically to
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
     - uses: actions/checkout@v2 # Check the code in the repository
