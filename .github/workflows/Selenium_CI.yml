@@ -18,17 +18,20 @@ jobs:
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v2 # Check the code in the repository
+    - uses: actions/checkout@v2
 
     - name: Set up Python
-      uses: actions/setup-python@v2 # Set up the python environment
+      uses: actions/setup-python@v2
       with:
         python-version: 3.12
 
     - name: Install dependencies
       run: |
         python3 -m pip install --upgrade pip 
-        pip install pytest pytest-cov pytest_bdd selenium # Updated to include 'selenium'
+        pip install pytest pytest-cov pytest_bdd selenium
+
+    - name: Set executable permissions for geckodriver
+      run: chmod +x drivers/geckodriver
 
     - name: Run tests with coverage
       run: |
