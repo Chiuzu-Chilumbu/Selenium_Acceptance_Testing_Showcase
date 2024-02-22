@@ -1,6 +1,3 @@
 # Pytest cache directories
 __pycache__/
 .pytest_cache/
-
-# Ignore geckodriver executable in the drivers directory
-drivers/geckodriver

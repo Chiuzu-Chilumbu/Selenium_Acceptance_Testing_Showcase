@@ -2,13 +2,14 @@
 
 import pytest
 from selenium import webdriver
-from selenium.webdriver.firefox.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
 
 
 @pytest.fixture
 def driver():
-	gecko_driver = 'drivers/geckodriver'
-	service = Service(gecko_driver)
-	driver = webdriver.Firefox(service=service)
-	yield driver
-	driver.quit()
+    # Initialize the ChromeDriver using webdriver_manager
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service)
+    yield driver
+    driver.quit()
