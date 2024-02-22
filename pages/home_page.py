@@ -2,7 +2,7 @@
 
 
 class HomePage:
-    URL = "http://the-internet.herokuapp.com/"
+    URL = "https://the-internet.herokuapp.com/"
     TITLE = "The Internet"
 
     def __init__(self, driver):

@@ -8,7 +8,6 @@ on:
   pull_request:
     branches: [ '**' ]
 
-
 permissions: # This is where we set permissions for the workflow specifically to write junit results
   contents: write 
   checks: write
@@ -28,14 +27,9 @@ jobs:
     - name: Install dependencies
       run: |
         python3 -m pip install --upgrade pip 
-        pip install pytest pytest-cov pytest_bdd selenium
+        pip install pytest pytest-cov pytest_bdd selenium webdriver_manager
 
-    - name: Download and set up geckodriver
-      run: |
-        mkdir -p drivers
-        wget https://github.com/mozilla/geckodriver/releases/download/v0.30.0/geckodriver-v0.30.0-linux64.tar.gz -O geckodriver.tar.gz
-        tar -xzf geckodriver.tar.gz -C drivers
-        chmod +x drivers/geckodriver
+    # Removed the manual download and setup of geckodriver
 
     - name: Run tests with coverage
       run: |
