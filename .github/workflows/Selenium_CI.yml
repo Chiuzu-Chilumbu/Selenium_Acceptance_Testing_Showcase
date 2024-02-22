@@ -39,6 +39,6 @@ jobs:
       uses: mikepenz/action-junit-report@v3 # use this action to publish the junit report
       if: success() || failure() # Ensure to publish the report regardless of any failures in previous steps in the workflow
       with:
-        report_paths: '**/junit.xml' # path to the junit report
+        report_paths: '**/report.xml' # path to the junit report
         detailed_summary: true # provide a detailed summary of the test results
         include_passed: true # include passed tests in the report
