@@ -30,8 +30,12 @@ jobs:
         python3 -m pip install --upgrade pip 
         pip install pytest pytest-cov pytest_bdd selenium
 
-    - name: Set executable permissions for geckodriver
-      run: chmod +x drivers/geckodriver
+    - name: Download and set up geckodriver
+      run: |
+        mkdir -p drivers
+        wget https://github.com/mozilla/geckodriver/releases/download/v0.30.0/geckodriver-v0.30.0-linux64.tar.gz -O geckodriver.tar.gz
+        tar -xzf geckodriver.tar.gz -C drivers
+        chmod +x drivers/geckodriver
 
     - name: Run tests with coverage
       run: |
