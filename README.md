@@ -20,7 +20,7 @@ This project uses GitHub Actions for Continuous Integration and Continuous Deplo
 
 ## Contributing
 
-We welcome contributions! If you'd like to contribute, please follow these steps:
+Contributions and feedback are welcome! If you'd like to contribute, please follow these steps:
 
 1. Fork the repository.
 2. Create a new branch for your feature (`git checkout -b feature/AmazingFeature`).
