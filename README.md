@@ -11,7 +11,6 @@ The project is structured as follows:
 
 - `/pages`: Contains Page Object models representing sections of the web application.
 - `/tests`: Contains pytest test files.
-- `/drivers`: Optionally stores WebDriver executables. (You can use WebDriver Manager to handle drivers automatically.)
 - `.github/workflows`: Contains GitHub Actions CI/CD workflow definitions.
 
 ## CI/CD
