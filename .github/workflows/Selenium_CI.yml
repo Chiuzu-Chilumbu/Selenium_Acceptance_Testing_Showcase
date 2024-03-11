@@ -8,8 +8,8 @@ on:
   pull_request:
     branches: [ '**' ]
 
-permissions: # This is where we set permissions for the workflow specifically to write junit results
-  contents: write 
+permissions:
+  contents: write
   checks: write
 
 jobs:
@@ -24,21 +24,20 @@ jobs:
       with:
         python-version: 3.12
 
-    - name: Install dependencies
-      run: |
-        python3 -m pip install --upgrade pip 
-        pip install pytest pytest-cov pytest_bdd selenium webdriver_manager
+    - name: Install pipenv
+      run: python3 -m pip install --upgrade pip && pip install pipenv
 
-    # Removed the manual download and setup of geckodriver
+    - name: Install dependencies using Pipfile
+      run: pipenv install --dev
 
     - name: Run tests with coverage
-      run: |
-        python -m pytest --verbose --junitxml=report.xml # create junit xml report with pytest
+      run: pipenv run python -m pytest --verbose --junitxml=report.xml # create junit xml report with pytest
 
     - name: Publish Test Report
-      uses: mikepenz/action-junit-report@v3 # use this action to publish the junit report
-      if: success() || failure() # Ensure to publish the report regardless of any failures in previous steps in the workflow
+      uses: mikepenz/action-junit-report@v3
+      if: success() || failure()
       with:
-        report_paths: '**/report.xml' # path to the junit report
-        detailed_summary: true # provide a detailed summary of the test results
-        include_passed: true # include passed tests in the report
+        report_paths: '**/report.xml'
+        detailed_summary: true
+        include_passed: true
+
