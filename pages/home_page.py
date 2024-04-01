@@ -1,4 +1,4 @@
-"""Home Page Object"""
+"""Home Page"""
 
 
 class HomePage:
@@ -9,8 +9,9 @@ class HomePage:
         self.driver = driver
 
     def load(self):
-        """load web page"""
+        """load home page"""
         self.driver.get(self.URL)
 
     def page_title(self):
+        """obteain page title"""
         return self.driver.title
