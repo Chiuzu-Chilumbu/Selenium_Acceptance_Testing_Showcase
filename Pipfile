@@ -31,8 +31,12 @@ typing-extensions = "==4.9.0"
 urllib3 = "==2.2.1"
 wsproto = "==1.2.0"
 webdriver-manager = "*"
+invoke = "*"
 
 [dev-packages]
 
 [requires]
 python_version = "3.12"
+
+[scripts]
+quality = "invoke quality"

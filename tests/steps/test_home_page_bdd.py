@@ -1,28 +1,23 @@
-"""Home page test steps"""
+"""Home page test step definitions"""
 
 from pytest_bdd import scenario, given, when, then
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 from pages.home_page import HomePage
 
-# Note: Removed GECKO_DRIVER and SERVICE constant since webdriver_manager
-# will handle it
+# Note: Removed GECKO_DRIVER and SERVICE constant because webdriver_manager
+# will handle all underlying processes
 
 scenario('../features/home_page.feature',
          'Home page is displayed when the application is launched')
 
 
 def test_home_page():
+    """To be run after all steps"""
     pass
 
 
 @given('the base url of the web application')
-def browser():
+def browser(driver):
     """Instantiate home page object"""
-    # Use webdriver_manager to handle ChromeDriver
-    service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service)
     home_page = HomePage(driver)
     return home_page
 

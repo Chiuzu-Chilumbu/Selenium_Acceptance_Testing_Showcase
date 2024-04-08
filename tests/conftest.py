@@ -19,7 +19,6 @@ def driver():
     chrome_options.add_argument("start-maximized")  # Starts Chrome maximized to avoid resolution issues
     chrome_options.add_argument("disable-infobars")  # Disables the "Chrome is being controlled by automated test software" infobar
     chrome_options.add_argument("--disable-extensions")  # Disables existing extensions
-    chrome_options.add_argument("--disable-gpu")  # Applicable to windows os only
 
     driver = webdriver.Chrome(service=service, options=chrome_options)
     yield driver
