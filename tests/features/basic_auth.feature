@@ -8,6 +8,5 @@ Feature: We should be able to locate the basic auth page and login successfully
 
   Scenario: At the basic auth page
     Given we are at the basic auth page
-	When we enter the username 
-	When we enter the password
-	Then we should be able to login successfully
+	When we enter the username and password to login
+	Then we should login successfully and view a success message
