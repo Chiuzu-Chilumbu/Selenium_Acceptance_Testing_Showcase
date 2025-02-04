@@ -23,3 +23,10 @@ def driver():
     driver = webdriver.Chrome(service=service, options=chrome_options)
     yield driver
     driver.quit()
+
+
+
+
+if __name__ == '__main__':
+      service = Service(ChromeDriverManager().install())
+      print(service)
