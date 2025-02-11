@@ -1,32 +1,38 @@
 """This conftest file keeps all the pytest fixtures"""
 
+import os
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
+from pages.add_remove_elements import AddRemoveElementsPage # Impo
 
 @pytest.fixture
 def driver():
-    # Initialize the ChromeDriver using webdriver_manager
+    """
+    Pytest fixture to initialize WebDriver with Chrome in both
+    local and CI environments.
+    """
+    # Initialize ChromeDriver with a specific version (optional for CI stability)
     service = Service(ChromeDriverManager().install())
 
-    # Configure ChromeOptions to run headlessly and with no sandbox for CI environment
+    # Configure ChromeOptions for headless mode in CI
     chrome_options = Options()
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--no-sandbox")  # This make Chromium reachable
-    chrome_options.add_argument("--disable-dev-shm-usage")  # Overcomes limited resource problems
-    chrome_options.add_argument("start-maximized")  # Starts Chrome maximized to avoid resolution issues
-    chrome_options.add_argument("disable-infobars")  # Disables the "Chrome is being controlled by automated test software" infobar
-    chrome_options.add_argument("--disable-extensions")  # Disables existing extensions
+    if os.getenv("CI"):  # Only apply these options in CI environments
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--disable-dev-shm-usage")
 
+    # Create WebDriver instance
     driver = webdriver.Chrome(service=service, options=chrome_options)
     yield driver
     driver.quit()
 
 
-
-
-if __name__ == '__main__':
-      service = Service(ChromeDriverManager().install())
-      print(service)
+@pytest.fixture
+def add_remove_page(driver):
+    """Fixture to initialise and return the AddRemoveElements Page"""
+    page = AddRemoveElementsPage(driver)
+    page.load()
+    return page
